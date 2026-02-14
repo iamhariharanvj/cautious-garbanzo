@@ -1,0 +1,9 @@
+{
+  "name": "for-jaanu",
+  "private": true,
+  "description": "A romantic 3D birthday surprise game",
+  "scripts": {
+    "start": "npx serve . -p 3000",
+    "serve": "npx serve . -p 3000"
+  }
+}

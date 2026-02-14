@@ -1,0 +1,187 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: 'Quicksand', sans-serif;
+  background: #0a0612;
+  color: #f5e6d3;
+  -webkit-font-smoothing: antialiased;
+}
+
+#app {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+#canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+}
+
+/* ---- UI ---- */
+#ui {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 2rem;
+  padding-bottom: 4rem;
+}
+
+#ui * {
+  pointer-events: auto;
+}
+
+.hint, .prompt {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.1rem, 3vw, 1.5rem);
+  font-weight: 400;
+  color: rgba(255, 235, 205, 0.9);
+  text-shadow: 0 0 20px rgba(255, 200, 150, 0.3);
+  text-align: center;
+  max-width: 90%;
+  transition: opacity 0.8s ease;
+}
+
+.hint-fallback {
+  font-size: 0.85em;
+  opacity: 0.75;
+  font-style: italic;
+}
+
+.prompt {
+  margin-top: 0.5rem;
+}
+
+.bench-message {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.2rem, 4vw, 1.8rem);
+  font-style: italic;
+  color: rgba(255, 248, 240, 0.95);
+  text-align: center;
+  padding: 1rem 1.5rem;
+  background: rgba(40, 25, 35, 0.4);
+  border-radius: 12px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 0 30px rgba(255, 200, 180, 0.15);
+  transition: opacity 0.8s ease;
+}
+
+.proposal-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1rem, 2.5vw, 1.4rem);
+  line-height: 1.6;
+  color: rgba(255, 248, 240, 0.98);
+  text-align: center;
+  max-width: 520px;
+  padding: 1.5rem 2rem;
+  background: rgba(30, 20, 35, 0.5);
+  border-radius: 16px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 0 40px rgba(255, 220, 200, 0.2);
+  transition: opacity 1s ease;
+}
+
+.flower-tag {
+  position: fixed;
+  bottom: 18%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(0.95rem, 2.5vw, 1.15rem);
+  font-style: italic;
+  color: rgba(255, 240, 220, 0.95);
+  padding: 0.5rem 1rem;
+  background: rgba(50, 35, 45, 0.6);
+  border-radius: 8px;
+  backdrop-filter: blur(6px);
+  transition: opacity 1s ease;
+}
+
+.hidden {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+/* ---- Start overlay ---- */
+#start-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(ellipse at center, rgba(30, 15, 45, 0.97) 0%, rgba(10, 6, 18, 0.99) 70%);
+  z-index: 10;
+  transition: opacity 1.2s ease;
+}
+
+#start-overlay.hidden {
+  pointer-events: none;
+}
+
+#start-overlay h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.5rem, 8vw, 4rem);
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  color: #f5e6d3;
+  text-shadow: 0 0 40px rgba(255, 220, 180, 0.4);
+  margin-bottom: 0.5rem;
+}
+
+#start-overlay .subtitle {
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  color: rgba(245, 230, 211, 0.8);
+  margin-bottom: 2.5rem;
+}
+
+#btn-start {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 500;
+  padding: 0.9rem 2.5rem;
+  border: 1px solid rgba(255, 220, 200, 0.5);
+  border-radius: 999px;
+  background: rgba(80, 50, 70, 0.4);
+  color: #f5e6d3;
+  cursor: pointer;
+  transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+#btn-start:hover {
+  background: rgba(120, 70, 90, 0.5);
+  box-shadow: 0 0 25px rgba(255, 200, 180, 0.3);
+  transform: scale(1.02);
+}
+
+#btn-start:active {
+  transform: scale(0.98);
+}
+
+.mic-note {
+  margin-top: 2rem;
+  font-size: 0.85rem;
+  color: rgba(245, 230, 211, 0.5);
+}
+
+/* Touch-friendly hit areas */
+@media (hover: none) {
+  #btn-start {
+    min-height: 48px;
+    min-width: 140px;
+  }
+}
