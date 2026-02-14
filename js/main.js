@@ -1617,6 +1617,10 @@ const keys = { w: false, a: false, s: false, d: false, g: false, e: false };
 window.addEventListener('keydown', (e) => {
   const k = e.key.toLowerCase();
   if (k in keys) keys[k] = true;
+  if (e.key === 'ArrowUp') { keys.w = true; e.preventDefault(); }
+  if (e.key === 'ArrowDown') { keys.s = true; e.preventDefault(); }
+  if (e.key === 'ArrowLeft') { keys.a = true; e.preventDefault(); }
+  if (e.key === 'ArrowRight') { keys.d = true; e.preventDefault(); }
   if (k === 'k' && state.inBoat && (!state.whistleDetected || state.hasSilverWhistle)) {
     e.preventDefault();
     state.whistleDetected = true;
@@ -1674,7 +1678,7 @@ window.addEventListener('keydown', (e) => {
       boatFlyableLantern.position.y += 0.25;
       boatFlyableLantern.userData.wobbleT = 0;
       boatFlyableLantern.userData.releaseTime = performance.now();
-      prompt.textContent = 'W/S = row · A/D = turn boat · Drag to look around · K or whistle for magic';
+      prompt.textContent = 'W/S or ↑/↓ = row · A/D or ←/→ = turn · Drag to look · K or whistle for magic';
       prompt.classList.remove('hidden');
     }
   }
@@ -1682,6 +1686,10 @@ window.addEventListener('keydown', (e) => {
 window.addEventListener('keyup', (e) => {
   const k = e.key.toLowerCase();
   if (k in keys) keys[k] = false;
+  if (e.key === 'ArrowUp') keys.w = false;
+  if (e.key === 'ArrowDown') keys.s = false;
+  if (e.key === 'ArrowLeft') keys.a = false;
+  if (e.key === 'ArrowRight') keys.d = false;
 });
 
 // Touch / mobile move (simplified: tap left/right to turn, forward to walk)
@@ -1698,7 +1706,7 @@ canvas.addEventListener('touchend', (e) => {
 
 function enterBoat() {
   state.inBoat = true;
-  prompt.textContent = 'W/S = row · A/D = turn boat · Drag to look around · K or whistle for magic';
+  prompt.textContent = 'W/S or ↑/↓ = row · A/D or ←/→ = turn · Drag to look · K or whistle for magic';
   prompt.classList.remove('hidden');
   controls.minDistance = 0.02;
   controls.maxDistance = 0.02;
